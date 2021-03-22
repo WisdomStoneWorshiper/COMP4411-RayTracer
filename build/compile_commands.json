@@ -1,0 +1,121 @@
+[
+{
+  "directory": "/Users/lkl/program/comp4411/COMP4411-RayTracer/build",
+  "command": "/usr/bin/clang++   -I../. -I/usr/local/include -F/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/System/Library/Frameworks  -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk -mmacosx-version-min=10.15   -std=gnu++2a -o CMakeFiles/proj3.dir/src/RayTracer.cpp.o -c /Users/lkl/program/comp4411/COMP4411-RayTracer/src/RayTracer.cpp",
+  "file": "/Users/lkl/program/comp4411/COMP4411-RayTracer/src/RayTracer.cpp"
+},
+
+{
+  "directory": "/Users/lkl/program/comp4411/COMP4411-RayTracer/build",
+  "command": "/usr/bin/clang++   -I../. -I/usr/local/include -F/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/System/Library/Frameworks  -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk -mmacosx-version-min=10.15   -std=gnu++2a -o CMakeFiles/proj3.dir/src/getopt.cpp.o -c /Users/lkl/program/comp4411/COMP4411-RayTracer/src/getopt.cpp",
+  "file": "/Users/lkl/program/comp4411/COMP4411-RayTracer/src/getopt.cpp"
+},
+
+{
+  "directory": "/Users/lkl/program/comp4411/COMP4411-RayTracer/build",
+  "command": "/usr/bin/clang++   -I../. -I/usr/local/include -F/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/System/Library/Frameworks  -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk -mmacosx-version-min=10.15   -std=gnu++2a -o CMakeFiles/proj3.dir/src/main.cpp.o -c /Users/lkl/program/comp4411/COMP4411-RayTracer/src/main.cpp",
+  "file": "/Users/lkl/program/comp4411/COMP4411-RayTracer/src/main.cpp"
+},
+
+{
+  "directory": "/Users/lkl/program/comp4411/COMP4411-RayTracer/build",
+  "command": "/usr/bin/clang++   -I../. -I/usr/local/include -F/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/System/Library/Frameworks  -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk -mmacosx-version-min=10.15   -std=gnu++2a -o CMakeFiles/proj3.dir/src/SceneObjects/Box.cpp.o -c /Users/lkl/program/comp4411/COMP4411-RayTracer/src/SceneObjects/Box.cpp",
+  "file": "/Users/lkl/program/comp4411/COMP4411-RayTracer/src/SceneObjects/Box.cpp"
+},
+
+{
+  "directory": "/Users/lkl/program/comp4411/COMP4411-RayTracer/build",
+  "command": "/usr/bin/clang++   -I../. -I/usr/local/include -F/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/System/Library/Frameworks  -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk -mmacosx-version-min=10.15   -std=gnu++2a -o CMakeFiles/proj3.dir/src/SceneObjects/Cone.cpp.o -c /Users/lkl/program/comp4411/COMP4411-RayTracer/src/SceneObjects/Cone.cpp",
+  "file": "/Users/lkl/program/comp4411/COMP4411-RayTracer/src/SceneObjects/Cone.cpp"
+},
+
+{
+  "directory": "/Users/lkl/program/comp4411/COMP4411-RayTracer/build",
+  "command": "/usr/bin/clang++   -I../. -I/usr/local/include -F/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/System/Library/Frameworks  -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk -mmacosx-version-min=10.15   -std=gnu++2a -o CMakeFiles/proj3.dir/src/SceneObjects/Cylinder.cpp.o -c /Users/lkl/program/comp4411/COMP4411-RayTracer/src/SceneObjects/Cylinder.cpp",
+  "file": "/Users/lkl/program/comp4411/COMP4411-RayTracer/src/SceneObjects/Cylinder.cpp"
+},
+
+{
+  "directory": "/Users/lkl/program/comp4411/COMP4411-RayTracer/build",
+  "command": "/usr/bin/clang++   -I../. -I/usr/local/include -F/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/System/Library/Frameworks  -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk -mmacosx-version-min=10.15   -std=gnu++2a -o CMakeFiles/proj3.dir/src/SceneObjects/Sphere.cpp.o -c /Users/lkl/program/comp4411/COMP4411-RayTracer/src/SceneObjects/Sphere.cpp",
+  "file": "/Users/lkl/program/comp4411/COMP4411-RayTracer/src/SceneObjects/Sphere.cpp"
+},
+
+{
+  "directory": "/Users/lkl/program/comp4411/COMP4411-RayTracer/build",
+  "command": "/usr/bin/clang++   -I../. -I/usr/local/include -F/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/System/Library/Frameworks  -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk -mmacosx-version-min=10.15   -std=gnu++2a -o CMakeFiles/proj3.dir/src/SceneObjects/Square.cpp.o -c /Users/lkl/program/comp4411/COMP4411-RayTracer/src/SceneObjects/Square.cpp",
+  "file": "/Users/lkl/program/comp4411/COMP4411-RayTracer/src/SceneObjects/Square.cpp"
+},
+
+{
+  "directory": "/Users/lkl/program/comp4411/COMP4411-RayTracer/build",
+  "command": "/usr/bin/clang++   -I../. -I/usr/local/include -F/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/System/Library/Frameworks  -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk -mmacosx-version-min=10.15   -std=gnu++2a -o CMakeFiles/proj3.dir/src/SceneObjects/trimesh.cpp.o -c /Users/lkl/program/comp4411/COMP4411-RayTracer/src/SceneObjects/trimesh.cpp",
+  "file": "/Users/lkl/program/comp4411/COMP4411-RayTracer/src/SceneObjects/trimesh.cpp"
+},
+
+{
+  "directory": "/Users/lkl/program/comp4411/COMP4411-RayTracer/build",
+  "command": "/usr/bin/clang++   -I../. -I/usr/local/include -F/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/System/Library/Frameworks  -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk -mmacosx-version-min=10.15   -std=gnu++2a -o CMakeFiles/proj3.dir/src/fileio/bitmap.cpp.o -c /Users/lkl/program/comp4411/COMP4411-RayTracer/src/fileio/bitmap.cpp",
+  "file": "/Users/lkl/program/comp4411/COMP4411-RayTracer/src/fileio/bitmap.cpp"
+},
+
+{
+  "directory": "/Users/lkl/program/comp4411/COMP4411-RayTracer/build",
+  "command": "/usr/bin/clang++   -I../. -I/usr/local/include -F/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/System/Library/Frameworks  -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk -mmacosx-version-min=10.15   -std=gnu++2a -o CMakeFiles/proj3.dir/src/fileio/parse.cpp.o -c /Users/lkl/program/comp4411/COMP4411-RayTracer/src/fileio/parse.cpp",
+  "file": "/Users/lkl/program/comp4411/COMP4411-RayTracer/src/fileio/parse.cpp"
+},
+
+{
+  "directory": "/Users/lkl/program/comp4411/COMP4411-RayTracer/build",
+  "command": "/usr/bin/clang++   -I../. -I/usr/local/include -F/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/System/Library/Frameworks  -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk -mmacosx-version-min=10.15   -std=gnu++2a -o CMakeFiles/proj3.dir/src/fileio/read.cpp.o -c /Users/lkl/program/comp4411/COMP4411-RayTracer/src/fileio/read.cpp",
+  "file": "/Users/lkl/program/comp4411/COMP4411-RayTracer/src/fileio/read.cpp"
+},
+
+{
+  "directory": "/Users/lkl/program/comp4411/COMP4411-RayTracer/build",
+  "command": "/usr/bin/clang++   -I../. -I/usr/local/include -F/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/System/Library/Frameworks  -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk -mmacosx-version-min=10.15   -std=gnu++2a -o CMakeFiles/proj3.dir/src/scene/camera.cpp.o -c /Users/lkl/program/comp4411/COMP4411-RayTracer/src/scene/camera.cpp",
+  "file": "/Users/lkl/program/comp4411/COMP4411-RayTracer/src/scene/camera.cpp"
+},
+
+{
+  "directory": "/Users/lkl/program/comp4411/COMP4411-RayTracer/build",
+  "command": "/usr/bin/clang++   -I../. -I/usr/local/include -F/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/System/Library/Frameworks  -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk -mmacosx-version-min=10.15   -std=gnu++2a -o CMakeFiles/proj3.dir/src/scene/light.cpp.o -c /Users/lkl/program/comp4411/COMP4411-RayTracer/src/scene/light.cpp",
+  "file": "/Users/lkl/program/comp4411/COMP4411-RayTracer/src/scene/light.cpp"
+},
+
+{
+  "directory": "/Users/lkl/program/comp4411/COMP4411-RayTracer/build",
+  "command": "/usr/bin/clang++   -I../. -I/usr/local/include -F/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/System/Library/Frameworks  -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk -mmacosx-version-min=10.15   -std=gnu++2a -o CMakeFiles/proj3.dir/src/scene/material.cpp.o -c /Users/lkl/program/comp4411/COMP4411-RayTracer/src/scene/material.cpp",
+  "file": "/Users/lkl/program/comp4411/COMP4411-RayTracer/src/scene/material.cpp"
+},
+
+{
+  "directory": "/Users/lkl/program/comp4411/COMP4411-RayTracer/build",
+  "command": "/usr/bin/clang++   -I../. -I/usr/local/include -F/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/System/Library/Frameworks  -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk -mmacosx-version-min=10.15   -std=gnu++2a -o CMakeFiles/proj3.dir/src/scene/ray.cpp.o -c /Users/lkl/program/comp4411/COMP4411-RayTracer/src/scene/ray.cpp",
+  "file": "/Users/lkl/program/comp4411/COMP4411-RayTracer/src/scene/ray.cpp"
+},
+
+{
+  "directory": "/Users/lkl/program/comp4411/COMP4411-RayTracer/build",
+  "command": "/usr/bin/clang++   -I../. -I/usr/local/include -F/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/System/Library/Frameworks  -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk -mmacosx-version-min=10.15   -std=gnu++2a -o CMakeFiles/proj3.dir/src/scene/scene.cpp.o -c /Users/lkl/program/comp4411/COMP4411-RayTracer/src/scene/scene.cpp",
+  "file": "/Users/lkl/program/comp4411/COMP4411-RayTracer/src/scene/scene.cpp"
+},
+
+{
+  "directory": "/Users/lkl/program/comp4411/COMP4411-RayTracer/build",
+  "command": "/usr/bin/clang++   -I../. -I/usr/local/include -F/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/System/Library/Frameworks  -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk -mmacosx-version-min=10.15   -std=gnu++2a -o CMakeFiles/proj3.dir/src/ui/TraceGLWindow.cpp.o -c /Users/lkl/program/comp4411/COMP4411-RayTracer/src/ui/TraceGLWindow.cpp",
+  "file": "/Users/lkl/program/comp4411/COMP4411-RayTracer/src/ui/TraceGLWindow.cpp"
+},
+
+{
+  "directory": "/Users/lkl/program/comp4411/COMP4411-RayTracer/build",
+  "command": "/usr/bin/clang++   -I../. -I/usr/local/include -F/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/System/Library/Frameworks  -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk -mmacosx-version-min=10.15   -std=gnu++2a -o CMakeFiles/proj3.dir/src/ui/TraceUI.cpp.o -c /Users/lkl/program/comp4411/COMP4411-RayTracer/src/ui/TraceUI.cpp",
+  "file": "/Users/lkl/program/comp4411/COMP4411-RayTracer/src/ui/TraceUI.cpp"
+},
+
+{
+  "directory": "/Users/lkl/program/comp4411/COMP4411-RayTracer/build",
+  "command": "/usr/bin/clang++   -I../. -I/usr/local/include -F/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/System/Library/Frameworks  -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk -mmacosx-version-min=10.15   -std=gnu++2a -o CMakeFiles/proj3.dir/src/vecmath/vecmath.cpp.o -c /Users/lkl/program/comp4411/COMP4411-RayTracer/src/vecmath/vecmath.cpp",
+  "file": "/Users/lkl/program/comp4411/COMP4411-RayTracer/src/vecmath/vecmath.cpp"
+}
+]
