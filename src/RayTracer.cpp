@@ -24,6 +24,7 @@ vec3f RayTracer::trace(Scene *scene, double x, double y) {
 // (or places called from here) to handle reflection, refraction, etc etc.
 vec3f RayTracer::traceRay(Scene *scene, const ray &r, const vec3f &thresh, int depth) {
 	isect i;
+	if (max_depth<depth) return vec3f(0.0, 0.0, 0.0);
 
 	if (scene->intersect(r, i)) {
 		// YOUR CODE HERE
@@ -38,7 +39,13 @@ vec3f RayTracer::traceRay(Scene *scene, const ray &r, const vec3f &thresh, int d
 		// rays.
 
 		const Material &m = i.getMaterial();
-		return m.shade(scene, r, i);
+		vec3f P=r.at(i.t);
+		vec3f R=-2*(r.getDirection().dot(i.N))*i.N+r.getDirection();
+		ray reflection=ray(P,R);
+		vec3f reflectedColor=traceRay(scene,reflection,thresh,depth+1);
+		reflectedColor=prod(m.kr,reflectedColor);
+		//reflectedColor+=m.kr;
+		return m.shade(scene, r, i)+reflectedColor;
 
 	} else {
 		// No intersection.  This ray travels to infinity, so we color
@@ -138,3 +145,5 @@ void RayTracer::tracePixel(int i, int j) {
 	pixel[1] = (int)(255.0 * col[1]);
 	pixel[2] = (int)(255.0 * col[2]);
 }
+
+void RayTracer::setDepth(int d){max_depth=d;}
