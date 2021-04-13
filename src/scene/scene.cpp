@@ -199,3 +199,23 @@ void Scene::initScene()
 			nonboundedobjects.push_back(*j);
 	}
 }
+
+void Scene::setAttConst(double a){
+	attConst=a;
+}
+void Scene::setAttLinear(double a){
+	attLinear=a;
+}
+void Scene::setAttQuad(double a){
+	attQuad=a;
+}
+
+double Scene::getAttConst(){
+	return attConst;
+}
+double Scene::getAttLinear(){
+	return attLinear;
+}
+double Scene::getAttQuad(){
+	return attQuad;
+}

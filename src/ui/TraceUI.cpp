@@ -92,6 +92,21 @@ void TraceUI::cb_depthSlides(Fl_Widget* o, void* v)
 	((TraceUI*)(o->user_data()))->m_nDepth=int( ((Fl_Slider *)o)->value() ) ;
 }
 
+void TraceUI::cb_attConstSlides(Fl_Widget* o, void* v)
+{
+	((TraceUI*)(o->user_data()))->m_nAttConst=double( ((Fl_Slider *)o)->value() ) ;
+}
+
+void TraceUI::cb_attLinearSlides(Fl_Widget* o, void* v)
+{
+	((TraceUI*)(o->user_data()))->m_nAttLinear=double( ((Fl_Slider *)o)->value() ) ;
+}
+
+void TraceUI::cb_attQuadSlides(Fl_Widget* o, void* v)
+{
+	((TraceUI*)(o->user_data()))->m_nAttQuad=double( ((Fl_Slider *)o)->value() ) ;
+}
+
 void TraceUI::cb_render(Fl_Widget* o, void* v)
 {
 	char buffer[256];
@@ -107,6 +122,9 @@ void TraceUI::cb_render(Fl_Widget* o, void* v)
 
 		pUI->raytracer->traceSetup(width, height);
 		pUI->raytracer->setDepth(pUI->getDepth());
+		pUI->raytracer->getScene()->setAttConst(pUI->getAttConst());
+		pUI->raytracer->getScene()->setAttLinear(pUI->getAttLinear());
+		pUI->raytracer->getScene()->setAttQuad(pUI->getAttQuad());
 		// Save the window label
 		const char *old_label = pUI->m_traceGlWindow->label();
 
@@ -195,6 +213,18 @@ int TraceUI::getDepth()
 	return m_nDepth;
 }
 
+double TraceUI::getAttConst(){
+	return m_nAttConst;
+}
+
+double TraceUI::getAttLinear(){
+	return m_nAttLinear;
+}
+
+double TraceUI::getAttQuad(){
+	return m_nAttQuad;
+}
+
 // menu definition
 Fl_Menu_Item TraceUI::menuitems[] = {
 	{ "&File",		0, 0, 0, FL_SUBMENU },
@@ -214,7 +244,11 @@ TraceUI::TraceUI() {
 	// init.
 	m_nDepth = 0;
 	m_nSize = 150;
-	m_mainWindow = new Fl_Window(100, 40, 320, 100, "Ray <Not Loaded>");
+
+	m_nAttConst=0.1;
+	m_nAttLinear=0.1;
+	m_nAttQuad=0.1;
+	m_mainWindow = new Fl_Window(100, 40, 320, 200, "Ray <Not Loaded>");
 		m_mainWindow->user_data((void*)(this));	// record self to be used by static callback functions
 		// install menu bar
 		m_menubar = new Fl_Menu_Bar(0, 0, 320, 25);
@@ -245,6 +279,42 @@ TraceUI::TraceUI() {
 		m_sizeSlider->value(m_nSize);
 		m_sizeSlider->align(FL_ALIGN_RIGHT);
 		m_sizeSlider->callback(cb_sizeSlides);
+
+		m_attConstSlider = new Fl_Value_Slider(10, 80, 180, 20, "Attenuation constant");
+		m_attConstSlider->user_data((void*)(this));	// record self to be used by static callback functions
+		m_attConstSlider->type(FL_HOR_NICE_SLIDER);
+        m_attConstSlider->labelfont(FL_COURIER);
+        m_attConstSlider->labelsize(12);
+		m_attConstSlider->minimum(0);
+		m_attConstSlider->maximum(1);
+		m_attConstSlider->step(0.01);
+		m_attConstSlider->value(m_nAttConst);
+		m_attConstSlider->align(FL_ALIGN_RIGHT);
+		m_attConstSlider->callback(cb_attConstSlides);
+
+		m_attLinearSlider = new Fl_Value_Slider(10, 105, 180, 20, "Attenuation linear");
+		m_attLinearSlider->user_data((void*)(this));	// record self to be used by static callback functions
+		m_attLinearSlider->type(FL_HOR_NICE_SLIDER);
+        m_attLinearSlider->labelfont(FL_COURIER);
+        m_attLinearSlider->labelsize(12);
+		m_attLinearSlider->minimum(0);
+		m_attLinearSlider->maximum(1);
+		m_attLinearSlider->step(0.01);
+		m_attLinearSlider->value(m_nAttLinear);
+		m_attLinearSlider->align(FL_ALIGN_RIGHT);
+		m_attLinearSlider->callback(cb_attLinearSlides);
+
+		m_attQuadSlider = new Fl_Value_Slider(10, 130, 180, 20, "Attenuation quadratic");
+		m_attQuadSlider->user_data((void*)(this));	// record self to be used by static callback functions
+		m_attQuadSlider->type(FL_HOR_NICE_SLIDER);
+        m_attQuadSlider->labelfont(FL_COURIER);
+        m_attQuadSlider->labelsize(12);
+		m_attQuadSlider->minimum(0);
+		m_attQuadSlider->maximum(1);
+		m_attQuadSlider->step(0.01);
+		m_attQuadSlider->value(m_nAttQuad);
+		m_attQuadSlider->align(FL_ALIGN_RIGHT);
+		m_attQuadSlider->callback(cb_attQuadSlides);
 
 		m_renderButton = new Fl_Button(240, 27, 70, 25, "&Render");
 		m_renderButton->user_data((void*)(this));

@@ -39,11 +39,14 @@ vec3f RayTracer::traceRay(Scene *scene, const ray &r, const vec3f &thresh, int d
 		// rays.
 
 		const Material &m = i.getMaterial();
+		//reflection
 		vec3f P=r.at(i.t);
 		vec3f R=-2*(r.getDirection().dot(i.N))*i.N+r.getDirection();
+		R=R.normalize();
 		ray reflection=ray(P,R);
 		vec3f reflectedColor=traceRay(scene,reflection,thresh,depth+1);
 		reflectedColor=prod(m.kr,reflectedColor);
+		//reflection end
 		//reflectedColor+=m.kr;
 		return m.shade(scene, r, i)+reflectedColor;
 
@@ -147,3 +150,7 @@ void RayTracer::tracePixel(int i, int j) {
 }
 
 void RayTracer::setDepth(int d){max_depth=d;}
+
+Scene *  RayTracer::getScene(){
+	return scene;
+}

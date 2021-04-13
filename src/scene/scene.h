@@ -270,7 +270,13 @@ public:
         
 	Camera *getCamera() { return &camera; }
 
+	void setAttConst(double);
+	void setAttLinear(double);
+	void setAttQuad(double);
 	
+	double getAttConst();
+	double getAttLinear();
+	double getAttQuad();
 
 private:
     list<Geometry*> objects;
@@ -278,6 +284,10 @@ private:
 	list<Geometry*> boundedobjects;
     list<Light*> lights;
     Camera camera;
+
+	double attConst;
+	double attLinear;
+	double attQuad;
 	
 	// Each object in the scene, provided that it has hasBoundingBoxCapability(),
 	// must fall within this bounding box.  Objects that don't have hasBoundingBoxCapability()

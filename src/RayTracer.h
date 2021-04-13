@@ -28,6 +28,8 @@ public:
 
 	void setDepth(int);
 
+	Scene * getScene();
+
 private:
 	unsigned char *buffer;
 	int buffer_width, buffer_height;
