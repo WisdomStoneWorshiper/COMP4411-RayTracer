@@ -17,12 +17,12 @@
 vec3f RayTracer::trace(Scene *scene, double x, double y) {
 	ray r(vec3f(0, 0, 0), vec3f(0, 0, 0));
 	scene->getCamera()->rayThrough(x, y, r);
-	return traceRay(scene, r, vec3f(1.0, 1.0, 1.0), 0).clamp();
+	return traceRay(scene, r, vec3f(1.0, 1.0, 1.0), 1.0, 0).clamp(); //passing in the refractive index of air
 }
 
 // Do recursive ray tracing!  You'll want to insert a lot of code here
 // (or places called from here) to handle reflection, refraction, etc etc.
-vec3f RayTracer::traceRay(Scene *scene, const ray &r, const vec3f &thresh, int depth) {
+vec3f RayTracer::traceRay(Scene *scene, const ray &r, const vec3f &thresh, double Ni, int depth) {
 	isect i;
 	if (max_depth<depth) return vec3f(0.0, 0.0, 0.0);
 
@@ -51,11 +51,25 @@ vec3f RayTracer::traceRay(Scene *scene, const ray &r, const vec3f &thresh, int d
 		vec3f R=-2*(r.getDirection().dot(i.N))*i.N+r.getDirection();
 		R=R.normalize();
 		ray reflection=ray(P,R);
-		vec3f reflectedColor=traceRay(scene,reflection,thresh,depth+1);
+		vec3f reflectedColor=traceRay(scene,reflection,thresh,Ni,depth+1);
 		reflectedColor=prod(m.kr,reflectedColor);
 		//reflection end
+
+		//refraction
+		double Nr = Ni/m.index; //refraction ratio
+		vec3f V = r.getDirection();
+		double cos_theta_t = 1-Nr*Nr*(  1 - ( i.N.dot(V) ) * ( i.N.dot(V) )  );
+		if (cos_theta_t < 0)				// if there is total internal reflection, no refraction happens
+			return phong+reflectedColor;
+		vec3f PP = r.at(i.t); 
+		vec3f T = ( Nr*(i.N.dot(V)) - sqrt(cos_theta_t) )*i.N - Nr*V;
+		T = T.normalize();
+		ray refracted_ray = ray(PP,T);
+		vec3f refractedColor = traceRay(scene,refracted_ray,thresh,m.index,depth+1);
+		refractedColor = prod(m.kt,refractedColor);
+		// refraction end
 		
-		return phong+reflectedColor;
+		return phong + reflectedColor + refractedColor;
 
 	} else {
 		// No intersection.  This ray travels to infinity, so we color
