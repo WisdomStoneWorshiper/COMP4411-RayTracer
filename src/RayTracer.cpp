@@ -56,6 +56,9 @@ vec3f RayTracer::traceRay(Scene *scene, const ray &r, const vec3f &thresh, doubl
 		//reflection end
 
 		//refraction
+		if (m.kt.length() < 0.000000001)	//if kt is very small, then material cannot transmit rays -> no refraction
+			return phong + reflectedColor;
+
 		double Nr = Ni/m.index; //refraction ratio
 		vec3f V = r.getDirection();
 		double cos_theta_t = 1-Nr*Nr*(  1 - ( i.N.dot(V) ) * ( i.N.dot(V) )  );
