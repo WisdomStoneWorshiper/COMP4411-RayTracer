@@ -29,7 +29,9 @@ vec3f Material::shade( Scene *scene, const ray& r, const isect& i ) const
 		vec3f Ld=prod(kd,I)*std::max(0.0,n.dot(l));
 		vec3f r=-2*(l.dot(n))*n+l;
 		vec3f Ls=prod(ks,I)*pow(std::max(0.0,v.dot(r)),shininess*128);
-		Isum=Isum+Ld+Ls;
+		vec3f atten=curr_light->distanceAttenuation(P)*curr_light->shadowAttenuation(P);
+
+		Isum=Isum+prod(atten,Ld+Ls);
 	}
 
 	return Isum.clamp();

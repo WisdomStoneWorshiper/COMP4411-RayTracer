@@ -6,23 +6,20 @@ SBT-raytracer 1.0
 
 
 
-camera
-{
+camera {
 	position = (15, 0, 5);
 	viewdir = (-1, 0, -0.3);
 	updir = (0, 0, 1);
 }
 
 // Using ambient intensity of 0.25
-ambient_light
-{
+ambient_light {
 	color = (0.25, 0.25, 0.25);
 }
 
 // Directional light which shouldn't
 // cast any shadows
-directional_light
-{
+directional_light {
 	direction = (-1, 0, -0.2);
 	color = (1, 1, 1);
 }

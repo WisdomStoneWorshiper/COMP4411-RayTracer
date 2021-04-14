@@ -3,15 +3,13 @@ SBT-raytracer 1.0
 // cyl_ambient.ray
 // Test for the ambient term
 
-camera
-{
+camera {
 	position = (5, 0, 0);
 	viewdir = (-1, 0, 0);
 	updir = (0, 1, 0);
 }
 
-ambient_light
-{
+ambient_light {
     color = (1.0, 1.0, 1.0);
 }
 

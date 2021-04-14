@@ -3,8 +3,7 @@ SBT-raytracer 1.0
 // cyl_diffuse.ray
 // Test for the diffuse term
 
-camera
-{
+camera {
 	position = (5, 0, 0);
 	viewdir = (-1, 0, 0);
 	updir = (0, 1, 0);
@@ -12,8 +11,7 @@ camera
 
 // This is a directional light coming from the
 // left of the scene.
-directional_light
-{
+directional_light {
 	// Direction is automatically normalized
 	direction = (-1, -0.5, -1);
 	color = (1, 0, 1);

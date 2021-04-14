@@ -3,8 +3,7 @@ SBT-raytracer 1.0
 // cyl_emissive.ray
 // Test for the emissive term
 
-camera
-{
+camera {
 	position = (5, 0, 0);
 	viewdir = (-1, 0, 0);
 	updir = (0, 1, 0);
