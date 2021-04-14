@@ -38,6 +38,12 @@ vec3f RayTracer::traceRay(Scene *scene, const ray &r, const vec3f &thresh, int d
 		// more steps: add in the contributions from reflected and refracted
 		// rays.
 
+		/*
+		My reference:
+		https://drive.google.com/file/d/17wMyM9TLaF0b76zvX_dhBjITrlUaNiLP/view?usp=sharing
+		
+		*/
+
 		const Material &m = i.getMaterial();
 		vec3f phong=m.shade(scene, r, i);
 		//reflection

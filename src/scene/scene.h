@@ -278,12 +278,18 @@ public:
 	double getAttLinear();
 	double getAttQuad();
 
+	void setAmbient(vec3f);
+
+	vec3f getAmbient();
+
 private:
     list<Geometry*> objects;
 	list<Geometry*> nonboundedobjects;
 	list<Geometry*> boundedobjects;
     list<Light*> lights;
     Camera camera;
+
+	vec3f ambient;
 
 	double attConst;
 	double attLinear;

@@ -219,3 +219,11 @@ double Scene::getAttLinear(){
 double Scene::getAttQuad(){
 	return attQuad;
 }
+
+void Scene::setAmbient(vec3f a){
+	ambient=a;
+}
+
+vec3f Scene::getAmbient(){
+	return ambient;
+}
