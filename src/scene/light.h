@@ -49,4 +49,21 @@ protected:
 	vec3f position;
 };
 
+class SpotLight
+	: public Light
+{
+public:
+	SpotLight( Scene *scene, const vec3f& pos,const vec3f& orien, const vec3f& color , const float& a)
+		: Light( scene, color ), position( pos ),orientation(orien),angle(a) {}
+	virtual vec3f shadowAttenuation(const vec3f& P) const;
+	virtual double distanceAttenuation( const vec3f& P ) const;
+	virtual vec3f getColor( const vec3f& P ) const;
+	virtual vec3f getDirection( const vec3f& P ) const;
+
+protected:
+	vec3f position;
+	vec3f orientation;
+	float angle;
+};
+
 #endif // __LIGHT_H__

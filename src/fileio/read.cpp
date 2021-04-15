@@ -532,7 +532,18 @@ static void processObject( Obj *obj, Scene *scene, mmap& materials )
 		scene->add( new PointLight( scene, 
 			tupleToVec( getField( child, "position" ) ),
 			tupleToVec( getColorField( child ) ) ) );
-	} else if (name == "ambient_light"){
+	} else if (name == "spot_light"){
+		if( child == NULL ) {
+			throw ParseError( "No info for point_light" );
+		}
+		scene->add( new SpotLight( scene, 
+			tupleToVec( getField( child, "position" ) ),
+			tupleToVec( getField( child, "direction" ) ),
+			tupleToVec( getColorField( child ) ),
+			 getField( child, "angle" )->getScalar()) );
+	}
+	
+	else if (name == "ambient_light"){
 		scene->setAmbient(tupleToVec( getColorField( child ) ));
 	} else if( 	name == "sphere" ||
 				name == "box" ||
