@@ -59,7 +59,7 @@ vec3f RayTracer::traceRay(Scene *scene, const ray &r, const vec3f &thresh, int d
 
 		//refraction
 		vec3f refractedColor = vec3f(0.0, 0.0, 0.0);
-		if (m.kt.length() < 0.000000001 || i.t < RAY_EPSILON)	//if kt is very small, then material cannot transmit rays -> no refraction
+		if (m.kt.length() < 0.000000001)	//if kt is very small, then material cannot transmit rays -> no refraction
 			return phong + reflectedColor;
 		
 		vec3f N;
@@ -84,7 +84,7 @@ vec3f RayTracer::traceRay(Scene *scene, const ray &r, const vec3f &thresh, int d
 		}
 
 		double Nr = ni/nt;
-		vec3f V = r.getDirection();
+		vec3f V = -r.getDirection();
 		double cos_theta_t = 1-Nr*Nr*(  1 - ( N.dot(V) ) * ( N.dot(V) )  );
 		if (cos_theta_t < 0)				// if there is total internal reflection, no refraction happens
 			return phong+reflectedColor;
@@ -93,7 +93,6 @@ vec3f RayTracer::traceRay(Scene *scene, const ray &r, const vec3f &thresh, int d
 		T = T.normalize();
 		ray refracted_ray = ray(PP,T);
 		refractedColor = traceRay(scene,refracted_ray,thresh,depth+1, material_stack);
-		//std::cout << depth << " " << m.kt[0] << " " << refractedColor[0] << " " << refractedColor[1] << " " << refractedColor[2] << std::endl;
 		refractedColor = prod(m.kt,refractedColor);
 		// refraction end
 		
