@@ -13,7 +13,18 @@ vec3f DirectionalLight::shadowAttenuation( const vec3f& P ) const
 {
     // YOUR CODE HERE:
     // You should implement shadow-handling code here.
-    return vec3f(1,1,1);
+    vec3f d = orientation;
+	ray objectToSource(P,d);
+	vec3f att = vec3f(1.0,1.0,1.0);
+	isect i;
+	while (scene->intersect(objectToSource,i)) {
+		std::cout << "direction" << std::endl;
+		const Material &m = i.getMaterial();
+		att = prod(att,m.kt);
+		vec3f Q = objectToSource.at(i.t);
+		objectToSource = ray(Q,d);
+	}
+    return att;
 }
 
 vec3f DirectionalLight::getColor( const vec3f& P ) const
@@ -56,5 +67,23 @@ vec3f PointLight::shadowAttenuation(const vec3f& P) const
 {
     // YOUR CODE HERE:
     // You should implement shadow-handling code here.
-    return vec3f(1,1,1);
+	vec3f d = (position - P).normalize();
+	ray objectToSource(P,d);
+	double T_light = (position - P).length();
+	vec3f att = vec3f(1.0,1.0,1.0);
+	isect i;
+	while (scene->intersect(objectToSource,i)) {
+		if (i.t < T_light) {
+			std::cout << "point 1" << std::endl;
+			const Material &m = i.getMaterial();
+			att = prod(att,m.kt);
+			vec3f Q = objectToSource.at(i.t);
+			objectToSource = ray(Q,d);
+			T_light -= i.t;
+		} else {
+			std::cout << "point 2" << std::endl;
+			return att;
+		}
+	}
+    return att;
 }
