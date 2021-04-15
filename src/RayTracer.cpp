@@ -66,6 +66,7 @@ vec3f RayTracer::traceRay(Scene *scene, const ray &r, const vec3f &thresh, int d
 		
 		vec3f N;
 		double ni,nt;
+		bool straight_line = false;
 		if (material_stack.empty()) {
 			ni = 1.0;
 			N = i.N;
@@ -78,22 +79,32 @@ vec3f RayTracer::traceRay(Scene *scene, const ray &r, const vec3f &thresh, int d
 				nt = material_stack.empty() ? 1.0 : material_stack.top().index;
 				N = -i.N;
 			} else {
-				ni = material_stack.top().index;
-				nt = m.index;
-				N = i.N;
-				material_stack.push(m);
+				if (alreadyInStack(material_stack,m)) {
+					removeFromStack(material_stack,m);
+					straight_line = true;
+				} else {
+					ni = material_stack.top().index;
+					nt = m.index;
+					N = i.N;
+					material_stack.push(m);
+				}
 			}
 		}
 
-		double Nr = ni/nt;
-		vec3f V = -r.getDirection();
-		double cos_theta_t = 1-Nr*Nr*(  1 - ( N.dot(V) ) * ( N.dot(V) )  );
-		if (cos_theta_t < 0)				// if there is total internal reflection, no refraction happens
-			return phong+reflectedColor;
-		vec3f PP = r.at(i.t); 
-		vec3f T = ( Nr*(N.dot(V)) - sqrt(cos_theta_t) )*N - Nr*V;
-		T = T.normalize();
-		ray refracted_ray = ray(PP,T);
+		ray refracted_ray({0,0,0},{0,0,0});
+		if (!straight_line) {
+			double Nr = ni/nt;
+			vec3f V = -r.getDirection();
+			double cos_theta_t = 1-Nr*Nr*(  1 - ( N.dot(V) ) * ( N.dot(V) )  );
+			if (cos_theta_t < 0)				// if there is total internal reflection, no refraction happens
+				return phong+reflectedColor;
+			vec3f PP = r.at(i.t); 
+			vec3f T = ( Nr*(N.dot(V)) - sqrt(cos_theta_t) )*N - Nr*V;
+			T = T.normalize();
+			refracted_ray = ray(PP,T);
+		} else {
+			refracted_ray = ray(r.at(i.t),r.getDirection());
+		}
 		refractedColor = traceRay(scene,refracted_ray,thresh,depth+1, material_stack);
 		refractedColor = prod(m.kt,refractedColor);
 		// refraction end
@@ -107,6 +118,31 @@ vec3f RayTracer::traceRay(Scene *scene, const ray &r, const vec3f &thresh, int d
 		// is just black.
 
 		return vec3f(0.0, 0.0, 0.0);
+	}
+}
+
+bool RayTracer::alreadyInStack(stack<Material> stk, Material m) {
+	while (!stk.empty()) {
+		if (stk.top().identity == m.identity)
+			return true;
+		stk.pop();
+	}
+	return false;
+}
+
+void RayTracer::removeFromStack(stack<Material>& stk, Material m) {
+	stack<Material> new_stack;
+	while (!stk.empty()) {
+		if (stk.top().identity == m.identity) {
+			stk.pop();
+			continue;
+		}
+		new_stack.push(stk.top());
+		stk.pop();
+	}
+	while (!new_stack.empty()) {
+		stk.push(new_stack.top());
+		new_stack.pop();
 	}
 }
 

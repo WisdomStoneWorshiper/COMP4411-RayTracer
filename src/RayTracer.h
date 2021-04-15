@@ -29,6 +29,9 @@ public:
 
 	void setDepth(int);
 
+	void removeFromStack(stack<Material>& stk, Material m);
+	bool alreadyInStack(stack<Material> stk, Material m);
+
 	Scene * getScene();
 
 private:
