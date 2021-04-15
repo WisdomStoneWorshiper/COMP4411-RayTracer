@@ -17,12 +17,12 @@
 vec3f RayTracer::trace(Scene *scene, double x, double y) {
 	ray r(vec3f(0, 0, 0), vec3f(0, 0, 0));
 	scene->getCamera()->rayThrough(x, y, r);
-	return traceRay(scene, r, vec3f(1.0, 1.0, 1.0), 1.0, 0).clamp(); //passing in the refractive index of air
+	return traceRay(scene, r, vec3f(1.0, 1.0, 1.0), true, 0).clamp(); //is air at start
 }
 
 // Do recursive ray tracing!  You'll want to insert a lot of code here
 // (or places called from here) to handle reflection, refraction, etc etc.
-vec3f RayTracer::traceRay(Scene *scene, const ray &r, const vec3f &thresh, double Ni, int depth) {
+vec3f RayTracer::traceRay(Scene *scene, const ray &r, const vec3f &thresh, bool isAir, int depth) {
 	isect i;
 	if (max_depth<depth) return vec3f(0.0, 0.0, 0.0);
 
@@ -43,34 +43,39 @@ vec3f RayTracer::traceRay(Scene *scene, const ray &r, const vec3f &thresh, doubl
 		https://drive.google.com/file/d/17wMyM9TLaF0b76zvX_dhBjITrlUaNiLP/view?usp=sharing
 		
 		*/
-
+		// std::cout  << "pos " << i.t << " depth " << depth << " isAir " << isAir << std::endl;
 		const Material &m = i.getMaterial();
 		vec3f phong=m.shade(scene, r, i);
+		phong = prod(phong, vec3f(1, 1, 1) - m.kt);
 		//reflection
 		vec3f P=r.at(i.t);
 		vec3f R=-2*(r.getDirection().dot(i.N))*i.N+r.getDirection();
 		R=R.normalize();
 		ray reflection=ray(P,R);
-		vec3f reflectedColor=traceRay(scene,reflection,thresh,Ni,depth+1);
+		vec3f reflectedColor=traceRay(scene,reflection,thresh,isAir,depth+1);
 		reflectedColor=prod(m.kr,reflectedColor);
 		//reflection end
 
 		//refraction
+		vec3f refractedColor = vec3f(0.0, 0.0, 0.0);
 		if (m.kt.length() < 0.000000001)	//if kt is very small, then material cannot transmit rays -> no refraction
 			return phong + reflectedColor;
 
-		double Nr = Ni/m.index; //refraction ratio
+		double Nr = isAir ? (1/m.index) : m.index/1; //refraction ratio
+		vec3f N = isAir ? i.N : -i.N;
 		vec3f V = r.getDirection();
-		double cos_theta_t = 1-Nr*Nr*(  1 - ( i.N.dot(V) ) * ( i.N.dot(V) )  );
+		double cos_theta_t = 1-Nr*Nr*(  1 - ( N.dot(V) ) * ( N.dot(V) )  );
 		if (cos_theta_t < 0)				// if there is total internal reflection, no refraction happens
 			return phong+reflectedColor;
 		vec3f PP = r.at(i.t); 
-		vec3f T = ( Nr*(i.N.dot(V)) - sqrt(cos_theta_t) )*i.N - Nr*V;
+		vec3f T = ( Nr*(N.dot(V)) - sqrt(cos_theta_t) )*N - Nr*V;
 		T = T.normalize();
 		ray refracted_ray = ray(PP,T);
-		vec3f refractedColor = traceRay(scene,refracted_ray,thresh,m.index,depth+1);
+		refractedColor = traceRay(scene,refracted_ray,thresh,!isAir,depth+1);
+		//std::cout << depth << " " << m.kt[0] << " " << refractedColor[0] << " " << refractedColor[1] << " " << refractedColor[2] << std::endl;
 		refractedColor = prod(m.kt,refractedColor);
 		// refraction end
+		
 		
 		return phong + reflectedColor + refractedColor;
 
