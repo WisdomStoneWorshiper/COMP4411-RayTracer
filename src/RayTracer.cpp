@@ -17,12 +17,13 @@
 vec3f RayTracer::trace(Scene *scene, double x, double y) {
 	ray r(vec3f(0, 0, 0), vec3f(0, 0, 0));
 	scene->getCamera()->rayThrough(x, y, r);
-	return traceRay(scene, r, vec3f(1.0, 1.0, 1.0), true, 0).clamp(); //is air at start
+	stack<Material> stack;
+	return traceRay(scene, r, vec3f(1.0, 1.0, 1.0), true, stack).clamp(); //is air at start
 }
 
 // Do recursive ray tracing!  You'll want to insert a lot of code here
 // (or places called from here) to handle reflection, refraction, etc etc.
-vec3f RayTracer::traceRay(Scene *scene, const ray &r, const vec3f &thresh, bool isAir, int depth) {
+vec3f RayTracer::traceRay(Scene *scene, const ray &r, const vec3f &thresh, int depth, stack<Material> material_stack) {
 	isect i;
 	if (max_depth<depth) return vec3f(0.0, 0.0, 0.0);
 
@@ -52,17 +53,37 @@ vec3f RayTracer::traceRay(Scene *scene, const ray &r, const vec3f &thresh, bool 
 		vec3f R=-2*(r.getDirection().dot(i.N))*i.N+r.getDirection();
 		R=R.normalize();
 		ray reflection=ray(P,R);
-		vec3f reflectedColor=traceRay(scene,reflection,thresh,isAir,depth+1);
+		vec3f reflectedColor=traceRay(scene,reflection,thresh,depth+1,material_stack);
 		reflectedColor=prod(m.kr,reflectedColor);
 		//reflection end
 
 		//refraction
 		vec3f refractedColor = vec3f(0.0, 0.0, 0.0);
-		if (m.kt.length() < 0.000000001)	//if kt is very small, then material cannot transmit rays -> no refraction
+		if (m.kt.length() < 0.000000001 || i.t < RAY_EPSILON)	//if kt is very small, then material cannot transmit rays -> no refraction
 			return phong + reflectedColor;
+		
+		vec3f N;
+		double ni,nt;
+		if (material_stack.empty()) {
+			ni = 1.0;
+			N = i.N;
+			nt = m.index;
+			material_stack.push(m);
+		} else {
+			if (material_stack.top().identity == m.identity) {
+				ni = m.index;
+				material_stack.pop();
+				nt = material_stack.empty() ? 1.0 : material_stack.top().index;
+				N = -i.N;
+			} else {
+				ni = material_stack.top().index;
+				nt = m.index;
+				N = i.N;
+				material_stack.push(m);
+			}
+		}
 
-		double Nr = isAir ? (1/m.index) : m.index/1; //refraction ratio
-		vec3f N = isAir ? i.N : -i.N;
+		double Nr = ni/nt;
 		vec3f V = r.getDirection();
 		double cos_theta_t = 1-Nr*Nr*(  1 - ( N.dot(V) ) * ( N.dot(V) )  );
 		if (cos_theta_t < 0)				// if there is total internal reflection, no refraction happens
@@ -71,7 +92,7 @@ vec3f RayTracer::traceRay(Scene *scene, const ray &r, const vec3f &thresh, bool 
 		vec3f T = ( Nr*(N.dot(V)) - sqrt(cos_theta_t) )*N - Nr*V;
 		T = T.normalize();
 		ray refracted_ray = ray(PP,T);
-		refractedColor = traceRay(scene,refracted_ray,thresh,!isAir,depth+1);
+		refractedColor = traceRay(scene,refracted_ray,thresh,depth+1, material_stack);
 		//std::cout << depth << " " << m.kt[0] << " " << refractedColor[0] << " " << refractedColor[1] << " " << refractedColor[2] << std::endl;
 		refractedColor = prod(m.kt,refractedColor);
 		// refraction end

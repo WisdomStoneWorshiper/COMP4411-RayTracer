@@ -24,7 +24,10 @@ public:
         , kr( vec3f( 0.0, 0.0, 0.0 ) )
         , kt( vec3f( 0.0, 0.0, 0.0 ) )
         , shininess( 0.0 ) 
-		, index(1.0) {}
+		, index(1.0) {
+            identity = n_materials;
+            n_materials++;
+        }
 
     Material( const vec3f& e, const vec3f& a, const vec3f& s, 
               const vec3f& d, const vec3f& r, const vec3f& t, double sh, double in)
@@ -39,6 +42,8 @@ public:
     vec3f kr;                    // reflective
     vec3f kt;                    // transmissive
     
+    int identity;
+    static int n_materials;
     double shininess;
     double index;               // index of refraction
 
