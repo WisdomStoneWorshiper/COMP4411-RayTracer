@@ -273,10 +273,12 @@ public:
 	void setAttConst(double);
 	void setAttLinear(double);
 	void setAttQuad(double);
+	void setThreshold(double);
 	
 	double getAttConst();
 	double getAttLinear();
 	double getAttQuad();
+	double getThreshold();
 
 	void setAmbient(vec3f);
 
@@ -294,6 +296,7 @@ private:
 	double attConst;
 	double attLinear;
 	double attQuad;
+	double threshold;
 	
 	// Each object in the scene, provided that it has hasBoundingBoxCapability(),
 	// must fall within this bounding box.  Objects that don't have hasBoundingBoxCapability()

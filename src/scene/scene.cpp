@@ -210,6 +210,10 @@ void Scene::setAttQuad(double a){
 	attQuad=a;
 }
 
+void Scene::setThreshold(double a) {
+	threshold=a;
+}
+
 double Scene::getAttConst(){
 	return attConst;
 }
@@ -218,6 +222,10 @@ double Scene::getAttLinear(){
 }
 double Scene::getAttQuad(){
 	return attQuad;
+}
+
+double Scene::getThreshold() {
+	return threshold;
 }
 
 void Scene::setAmbient(vec3f a){

@@ -18,7 +18,7 @@ vec3f RayTracer::trace(Scene *scene, double x, double y) {
 	ray r(vec3f(0, 0, 0), vec3f(0, 0, 0));
 	scene->getCamera()->rayThrough(x, y, r);
 	stack<Material> stack;
-	return traceRay(scene, r, vec3f(1.0, 1.0, 1.0), true, stack).clamp(); //is air at start
+	return traceRay(scene, r, vec3f(1.0, 1.0, 1.0), 0, stack).clamp(); //is air at start
 }
 
 // Do recursive ray tracing!  You'll want to insert a lot of code here
@@ -47,6 +47,8 @@ vec3f RayTracer::traceRay(Scene *scene, const ray &r, const vec3f &thresh, int d
 		// std::cout  << "pos " << i.t << " depth " << depth << " isAir " << isAir << std::endl;
 		const Material &m = i.getMaterial();
 		vec3f phong=m.shade(scene, r, i);
+		if (phong.length() < getScene()->getThreshold())		//adaptive termination
+			return phong;
 		phong = prod(phong, vec3f(1, 1, 1) - m.kt);
 		//reflection
 		vec3f P=r.at(i.t);

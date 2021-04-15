@@ -32,6 +32,7 @@ public:
 	Fl_Slider*			m_attConstSlider;
 	Fl_Slider*			m_attLinearSlider;
 	Fl_Slider*			m_attQuadSlider;
+	Fl_Slider*			m_thresholdSlider;
 
 	Fl_Button*			m_renderButton;
 	Fl_Button*			m_stopButton;
@@ -49,6 +50,7 @@ public:
 	double getAttConst();
 	double getAttLinear();
 	double getAttQuad();
+	double getThreshold();
 
 private:
 	RayTracer*	raytracer;
@@ -59,6 +61,7 @@ private:
 	double m_nAttConst;
 	double m_nAttLinear;
 	double m_nAttQuad;
+	double m_nThreshold;
 
 // static class members
 	static Fl_Menu_Item menuitems[];
@@ -78,6 +81,7 @@ private:
 	static void cb_attConstSlides(Fl_Widget* o, void* v);
 	static void cb_attLinearSlides(Fl_Widget* o, void* v);
 	static void cb_attQuadSlides(Fl_Widget* o, void* v);
+	static void cb_thresholdSlides(Fl_Widget* o, void* v);
 
 	static void cb_render(Fl_Widget* o, void* v);
 	static void cb_stop(Fl_Widget* o, void* v);

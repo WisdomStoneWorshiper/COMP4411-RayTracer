@@ -107,6 +107,11 @@ void TraceUI::cb_attQuadSlides(Fl_Widget* o, void* v)
 	((TraceUI*)(o->user_data()))->m_nAttQuad=double( ((Fl_Slider *)o)->value() ) ;
 }
 
+void TraceUI::cb_thresholdSlides(Fl_Widget* o, void* v)
+{
+	((TraceUI*)(o->user_data()))->m_nThreshold=double( ((Fl_Slider *)o)->value() ) ;
+}
+
 void TraceUI::cb_render(Fl_Widget* o, void* v)
 {
 	char buffer[256];
@@ -125,6 +130,7 @@ void TraceUI::cb_render(Fl_Widget* o, void* v)
 		pUI->raytracer->getScene()->setAttConst(pUI->getAttConst());
 		pUI->raytracer->getScene()->setAttLinear(pUI->getAttLinear());
 		pUI->raytracer->getScene()->setAttQuad(pUI->getAttQuad());
+		pUI->raytracer->getScene()->setThreshold(pUI->getThreshold());
 		// Save the window label
 		const char *old_label = pUI->m_traceGlWindow->label();
 
@@ -225,6 +231,10 @@ double TraceUI::getAttQuad(){
 	return m_nAttQuad;
 }
 
+double TraceUI::getThreshold(){
+	return m_nThreshold;
+}
+
 // menu definition
 Fl_Menu_Item TraceUI::menuitems[] = {
 	{ "&File",		0, 0, 0, FL_SUBMENU },
@@ -248,6 +258,7 @@ TraceUI::TraceUI() {
 	m_nAttConst=0.1;
 	m_nAttLinear=0.1;
 	m_nAttQuad=0.1;
+	m_nThreshold = 0.0;
 	m_mainWindow = new Fl_Window(100, 40, 320, 200, "Ray <Not Loaded>");
 		m_mainWindow->user_data((void*)(this));	// record self to be used by static callback functions
 		// install menu bar
@@ -315,6 +326,18 @@ TraceUI::TraceUI() {
 		m_attQuadSlider->value(m_nAttQuad);
 		m_attQuadSlider->align(FL_ALIGN_RIGHT);
 		m_attQuadSlider->callback(cb_attQuadSlides);
+
+		m_thresholdSlider = new Fl_Value_Slider(10, 155, 180, 20, "Adaptive Threshold");
+		m_thresholdSlider->user_data((void*)(this));	// record self to be used by static callback functions
+		m_thresholdSlider->type(FL_HOR_NICE_SLIDER);
+        m_thresholdSlider->labelfont(FL_COURIER);
+        m_thresholdSlider->labelsize(12);
+		m_thresholdSlider->minimum(0);
+		m_thresholdSlider->maximum(1);
+		m_thresholdSlider->step(0.01);
+		m_thresholdSlider->value(m_nThreshold);
+		m_thresholdSlider->align(FL_ALIGN_RIGHT);
+		m_thresholdSlider->callback(cb_thresholdSlides);
 
 		m_renderButton = new Fl_Button(240, 27, 70, 25, "&Render");
 		m_renderButton->user_data((void*)(this));
