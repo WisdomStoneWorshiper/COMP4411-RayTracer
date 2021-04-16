@@ -1,6 +1,7 @@
 #include <cmath>
 
 #include "light.h"
+ #define M_PI 3.14159265358979323846 // pi
 
 double DirectionalLight::distanceAttenuation( const vec3f& P ) const
 {
