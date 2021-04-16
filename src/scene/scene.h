@@ -274,11 +274,17 @@ public:
 	void setAttLinear(double);
 	void setAttQuad(double);
 	void setThreshold(double);
+	void setSubPixels(int);
+	void setSuperSampling(bool);
+	void setJitter(bool);
 	
 	double getAttConst();
 	double getAttLinear();
 	double getAttQuad();
 	double getThreshold();
+	int getSubPixels();
+	bool getSuperSampling();
+	bool getJitter();
 
 	void setAmbient(vec3f);
 
@@ -297,6 +303,9 @@ private:
 	double attLinear;
 	double attQuad;
 	double threshold;
+	int n_subPixels;
+	bool supersampling;
+	bool jitter;
 	
 	// Each object in the scene, provided that it has hasBoundingBoxCapability(),
 	// must fall within this bounding box.  Objects that don't have hasBoundingBoxCapability()

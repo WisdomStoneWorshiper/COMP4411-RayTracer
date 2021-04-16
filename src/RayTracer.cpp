@@ -15,6 +15,39 @@
 // enter the main ray-tracing method, getting things started by plugging
 // in an initial ray weight of (0.0,0.0,0.0) and an initial recursion depth of 0.
 vec3f RayTracer::trace(Scene *scene, double x, double y) {
+
+	if (scene->getSuperSampling()) {
+		int n_subpixels = scene->getSubPixels();
+		double subpixel_height = 1.0/(buffer_height*n_subpixels);
+		double subpixel_width = 1.0/(buffer_width*n_subpixels);
+		double start_x = x - subpixel_width*((n_subpixels-1)/2);
+		double start_y = y + subpixel_height*((n_subpixels-1)/2);
+		vec3f result(0,0,0);
+		double jitter_x = 0;
+		double jitter_y = 0;
+
+		for (int Y = 0; Y < n_subpixels; Y++) {
+			if (scene->getJitter()) {
+				jitter_x = static_cast <float> (rand()) / static_cast <float> (RAND_MAX); //in range 0.0 to 1.0
+				jitter_x -= subpixel_width/2;
+				jitter_x = min(jitter_x,subpixel_width/2);	//in range -subpixel_width/2 to subpixel_width/2
+				jitter_y = static_cast <float> (rand()) / static_cast <float> (RAND_MAX); //in range 0.0 to 1.0
+				jitter_y -= subpixel_height/2;
+				jitter_y = min(jitter_y,subpixel_height/2);	//in range -subpixel_height/2 to subpixel_height/2
+			}
+			for (int X = 0; X < n_subpixels; X++) {
+				double new_y = start_y - Y*subpixel_height + jitter_y;
+				double new_x = start_x + X*subpixel_width + jitter_x;
+				ray r(vec3f(0, 0, 0), vec3f(0, 0, 0));
+				scene->getCamera()->rayThrough(new_x, new_y, r);
+				stack<Material> stack;
+				result += traceRay(scene, r, vec3f(1.0, 1.0, 1.0), 0, stack).clamp();
+			}
+		}
+		result /= (n_subpixels*n_subpixels);
+		return result;
+	}
+
 	ray r(vec3f(0, 0, 0), vec3f(0, 0, 0));
 	scene->getCamera()->rayThrough(x, y, r);
 	stack<Material> stack;

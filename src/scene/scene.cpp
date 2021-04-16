@@ -214,6 +214,18 @@ void Scene::setThreshold(double a) {
 	threshold=a;
 }
 
+void Scene::setSubPixels(int a) {
+	n_subPixels = a;
+}
+
+void Scene::setSuperSampling(bool a) {
+	supersampling=a;
+}
+
+void Scene::setJitter(bool a) {
+	jitter=a;
+}
+
 double Scene::getAttConst(){
 	return attConst;
 }
@@ -226,6 +238,18 @@ double Scene::getAttQuad(){
 
 double Scene::getThreshold() {
 	return threshold;
+}
+
+int Scene::getSubPixels() {
+	return n_subPixels;
+}
+
+bool Scene::getSuperSampling() {
+	return supersampling;
+}
+
+bool Scene::getJitter() {
+	return jitter;
 }
 
 void Scene::setAmbient(vec3f a){

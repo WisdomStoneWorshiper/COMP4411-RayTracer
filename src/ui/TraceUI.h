@@ -33,9 +33,12 @@ public:
 	Fl_Slider*			m_attLinearSlider;
 	Fl_Slider*			m_attQuadSlider;
 	Fl_Slider*			m_thresholdSlider;
+	Fl_Slider*			m_subPixelSlider;
 
 	Fl_Button*			m_renderButton;
 	Fl_Button*			m_stopButton;
+	Fl_Check_Button*	m_superSamplingButton;
+	Fl_Check_Button*	m_jitterButton;
 
 	TraceGLWindow*		m_traceGlWindow;
 
@@ -51,6 +54,9 @@ public:
 	double getAttLinear();
 	double getAttQuad();
 	double getThreshold();
+	int getSubPixels();
+	bool getSuperSampling();
+	bool getJitter();
 
 private:
 	RayTracer*	raytracer;
@@ -62,6 +68,9 @@ private:
 	double m_nAttLinear;
 	double m_nAttQuad;
 	double m_nThreshold;
+	int m_nSubPixels;
+	bool m_supersampling;
+	bool m_jitter;
 
 // static class members
 	static Fl_Menu_Item menuitems[];
@@ -82,9 +91,12 @@ private:
 	static void cb_attLinearSlides(Fl_Widget* o, void* v);
 	static void cb_attQuadSlides(Fl_Widget* o, void* v);
 	static void cb_thresholdSlides(Fl_Widget* o, void* v);
+	static void cb_subPixelSlides(Fl_Widget* o, void* v);
 
 	static void cb_render(Fl_Widget* o, void* v);
 	static void cb_stop(Fl_Widget* o, void* v);
+	static void cb_superSampling(Fl_Widget* o, void* v);
+	static void cb_jitter(Fl_Widget* o, void* v);
 };
 
 #endif

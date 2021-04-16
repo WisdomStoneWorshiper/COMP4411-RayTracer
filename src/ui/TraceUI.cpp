@@ -112,6 +112,20 @@ void TraceUI::cb_thresholdSlides(Fl_Widget* o, void* v)
 	((TraceUI*)(o->user_data()))->m_nThreshold=double( ((Fl_Slider *)o)->value() ) ;
 }
 
+void TraceUI::cb_subPixelSlides(Fl_Widget* o, void* v)
+{
+	((TraceUI*)(o->user_data()))->m_nSubPixels=int( ((Fl_Slider *)o)->value() ) ;
+}
+
+void TraceUI::cb_superSampling(Fl_Widget* o, void* v)
+{
+	((TraceUI*)(o->user_data()))->m_supersampling = bool(dynamic_cast<Fl_Check_Button *>(o)->value());
+}
+
+void TraceUI::cb_jitter(Fl_Widget* o, void* v) {
+	((TraceUI*)(o->user_data()))->m_jitter = bool(dynamic_cast<Fl_Check_Button *>(o)->value());
+}
+
 void TraceUI::cb_render(Fl_Widget* o, void* v)
 {
 	char buffer[256];
@@ -131,6 +145,9 @@ void TraceUI::cb_render(Fl_Widget* o, void* v)
 		pUI->raytracer->getScene()->setAttLinear(pUI->getAttLinear());
 		pUI->raytracer->getScene()->setAttQuad(pUI->getAttQuad());
 		pUI->raytracer->getScene()->setThreshold(pUI->getThreshold());
+		pUI->raytracer->getScene()->setSubPixels(pUI->getSubPixels());
+		pUI->raytracer->getScene()->setSuperSampling(pUI->getSuperSampling());
+		pUI->raytracer->getScene()->setJitter(pUI->getJitter());
 		// Save the window label
 		const char *old_label = pUI->m_traceGlWindow->label();
 
@@ -235,6 +252,18 @@ double TraceUI::getThreshold(){
 	return m_nThreshold;
 }
 
+int TraceUI::getSubPixels() {
+	return m_nSubPixels;
+}
+
+bool TraceUI::getSuperSampling() {
+	return m_supersampling;
+}
+
+bool TraceUI::getJitter() {
+	return m_jitter;
+}
+
 // menu definition
 Fl_Menu_Item TraceUI::menuitems[] = {
 	{ "&File",		0, 0, 0, FL_SUBMENU },
@@ -259,7 +288,10 @@ TraceUI::TraceUI() {
 	m_nAttLinear=0.1;
 	m_nAttQuad=0.1;
 	m_nThreshold = 0.0;
-	m_mainWindow = new Fl_Window(100, 40, 320, 200, "Ray <Not Loaded>");
+	m_nSubPixels = 1;
+	m_supersampling = false;
+	m_jitter = false;
+	m_mainWindow = new Fl_Window(100, 40, 320, 300, "Ray <Not Loaded>");
 		m_mainWindow->user_data((void*)(this));	// record self to be used by static callback functions
 		// install menu bar
 		m_menubar = new Fl_Menu_Bar(0, 0, 320, 25);
@@ -339,6 +371,18 @@ TraceUI::TraceUI() {
 		m_thresholdSlider->align(FL_ALIGN_RIGHT);
 		m_thresholdSlider->callback(cb_thresholdSlides);
 
+		m_subPixelSlider = new Fl_Value_Slider(10, 180, 180, 20, "Sub Pixel Samples");
+		m_subPixelSlider->user_data((void*)(this));	// record self to be used by static callback functions
+		m_subPixelSlider->type(FL_HOR_NICE_SLIDER);
+        m_subPixelSlider->labelfont(FL_COURIER);
+        m_subPixelSlider->labelsize(12);
+		m_subPixelSlider->minimum(1);
+		m_subPixelSlider->maximum(5);
+		m_subPixelSlider->step(1);
+		m_subPixelSlider->value(m_nSubPixels);
+		m_subPixelSlider->align(FL_ALIGN_RIGHT);
+		m_subPixelSlider->callback(cb_subPixelSlides);
+
 		m_renderButton = new Fl_Button(240, 27, 70, 25, "&Render");
 		m_renderButton->user_data((void*)(this));
 		m_renderButton->callback(cb_render);
@@ -346,6 +390,14 @@ TraceUI::TraceUI() {
 		m_stopButton = new Fl_Button(240, 55, 70, 25, "&Stop");
 		m_stopButton->user_data((void*)(this));
 		m_stopButton->callback(cb_stop);
+
+		m_superSamplingButton = new Fl_Check_Button(10, 220, 70, 25, "&Super Sampling");
+		m_superSamplingButton->user_data((void*)(this));
+		m_superSamplingButton->callback(cb_superSampling);
+
+		m_jitterButton = new Fl_Check_Button(10, 250, 70, 25, "&Jitter");
+		m_jitterButton->user_data((void*)(this));
+		m_jitterButton->callback(cb_jitter);
 
 		m_mainWindow->callback(cb_exit2);
 		m_mainWindow->when(FL_HIDE);
