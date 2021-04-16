@@ -6,9 +6,9 @@ HKUST login(s): kkotecha, klloaj
 Delete yes/no when appropriate
 
 W adaptive termination				yes
-W antialiasing by supersampling			no
-+W jittering					no
-B spot lights					no
+W antialiasing by supersampling			yes
++W jittering					yes
+B spot lights					yes
 B background image				no
 B accelerate shadow atteuation			no
 B overlapping tranparent objects		yes

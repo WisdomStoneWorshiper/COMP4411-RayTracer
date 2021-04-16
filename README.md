@@ -1,5 +1,6 @@
 ## Bells and Whistles 
  
 - [x] (1W) Implement an adaptive termination criterion for tracing rays, based on ray contribution.  Control the adaptation  threshold with a slider.
+- [x] (1W + 1W) Implement antialiasing by supersampling and averaging down.  You must provide a slider that indicates the number of sub-pixel samples being used (e.g., something in the range 1-5 indicating 1x1, 2x2, ... 5x5 supersampling). This whistle upgrades to a bell if you implement the first stage of distribution ray tracing by jittering the sub-pixel samples.  The noise introduced by jittering should be evident when casting 1 ray per pixel. 
 - [x] (1B) Implement spot lights.
 - [x] (1B)  Deal with overlapping objects intelligently.  While the skeleton code handles materials with arbitrary indices of refraction, it assumes that objects don't intersect one another. It breaks down when objects intersect or are wholly contained inside other objects. Add support to the refraction code for detecting this and handling it in a more realistic fashion.  Note, however, that in the real world, objects can't coexist in the same place at the same time. You will have to make assumptions as to how to choose the index of refraction in the overlapping space.  Make those assumptions clear when demonstrating the results. 
