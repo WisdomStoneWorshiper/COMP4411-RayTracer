@@ -49,6 +49,7 @@ protected:
 	vec3f position;
 };
 
+
 class SpotLight
 	: public Light
 {

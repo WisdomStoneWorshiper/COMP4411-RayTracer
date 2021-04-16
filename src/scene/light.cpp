@@ -115,7 +115,7 @@ vec3f SpotLight::shadowAttenuation(const vec3f& P) const
 {
     // YOUR CODE HERE:
     // You should implement shadow-handling code here.
-	vec3f Lp=getDirection(P);
+	vec3f Lp=-1*getDirection(P);
 	double I = Lp.dot(orientation.normalize());
 	double range = cos(angle/180.0*M_PI);
 	bool in_range=false; 
