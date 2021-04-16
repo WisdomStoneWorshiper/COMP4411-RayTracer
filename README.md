@@ -1,4 +1,5 @@
 ## Bells and Whistles 
  
 - [x] (1W) Implement an adaptive termination criterion for tracing rays, based on ray contribution.  Control the adaptation  threshold with a slider.
+- [x] (1B) Implement spot lights.
 - [x] (1B)  Deal with overlapping objects intelligently.  While the skeleton code handles materials with arbitrary indices of refraction, it assumes that objects don't intersect one another. It breaks down when objects intersect or are wholly contained inside other objects. Add support to the refraction code for detecting this and handling it in a more realistic fashion.  Note, however, that in the real world, objects can't coexist in the same place at the same time. You will have to make assumptions as to how to choose the index of refraction in the overlapping space.  Make those assumptions clear when demonstrating the results. 
